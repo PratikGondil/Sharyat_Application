@@ -1,5 +1,6 @@
 package com.sharyat.app.di
 
+import com.sharyat.app.data.ApiService
 import retrofit2.converter.gson.GsonConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -33,5 +34,11 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideApiService(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 }
